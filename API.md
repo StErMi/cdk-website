@@ -49,6 +49,7 @@ new Website(scope: Construct, id: string, props: WebsiteProps)
   * **indexDoc** (<code>string</code>)  the websiteIndexDocument of your S3 Bucket (also used as redirect on CloudFront errorConfigurations if you have not defined an errorDoc). 
   * **subdomain** (<code>string</code>)  the subdomain you want to deploy to. 
   * **websiteBuildFolder** (<code>string</code>)  local path to the website folder you want to deploy on S3. 
+  * **certificateARN** (<code>string</code>)  the subdomain certificate ARN, if provided it will not create a new certification for the subdomain. __*Optional*__
   * **errorDoc** (<code>string</code>)  the websiteErrorDocument of your S3 Bucket, also used as redirect on CloudFront errorConfigurations. __*Optional*__
 
 
@@ -91,6 +92,7 @@ Name | Type | Description
 **subdomain** | <code>string</code> | the subdomain you want to deploy to.
 **websiteBuildFolder** | <code>string</code> | local path to the website folder you want to deploy on S3.
 **analyticsReporting**? | <code>boolean</code> | Include runtime versioning information in this Stack.<br/>__*Default*__: `analyticsReporting` setting of containing `App`, or value of 'aws:cdk:version-reporting' context key
+**certificateARN**? | <code>string</code> | the subdomain certificate ARN, if provided it will not create a new certification for the subdomain.<br/>__*Optional*__
 **description**? | <code>string</code> | A description of the stack.<br/>__*Default*__: No description.
 **env**? | <code>[Environment](#aws-cdk-core-environment)</code> | The AWS environment (account/region) where this stack will be deployed.<br/>__*Default*__: The environment of the containing `Stage` if available, otherwise create the stack will be environment-agnostic.
 **errorDoc**? | <code>string</code> | the websiteErrorDocument of your S3 Bucket, also used as redirect on CloudFront errorConfigurations.<br/>__*Optional*__

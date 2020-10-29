@@ -218,7 +218,7 @@ export class Website extends Construct {
     const accessIdentity = this.getAccessIdentity(websiteBucket);
     const hostedZone = this.getHostedZone();
     let certificateArn = this.props.certificateARN;
-    if ( certificateArn === undefined && certificateArn === null ) {
+    if ( certificateArn === undefined || certificateArn === null ) {
       const certificate = this.getCertificate(hostedZone);
       certificateArn = certificate.certificateArn;
     }
