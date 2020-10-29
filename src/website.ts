@@ -46,6 +46,11 @@ export interface WebsiteProps extends StackProps {
    * the subdomain you want to deploy to
    */
   readonly subdomain: string;
+
+  /**
+   * the subdomain certificate ARN, if provided it will not create a new certification for the subdomain
+   */
+  readonly certificateARN?: string;
 }
 
 /**
@@ -127,7 +132,7 @@ export class Website extends Construct {
   private getCloudFrontDistribution(
     websiteBucket: Bucket,
     accessIdentity: OriginAccessIdentity,
-    certificate: DnsValidatedCertificate,
+    certificateArn: string,
   ): CloudFrontWebDistribution {
     const fullDomain = `${this.props.subdomain}.${this.props.domain}`;
     const distribution = new CloudFrontWebDistribution(
@@ -135,7 +140,7 @@ export class Website extends Construct {
       'SiteDistribution',
       {
         aliasConfiguration: {
-          acmCertRef: certificate.certificateArn,
+          acmCertRef: certificateArn,
           names: [fullDomain],
           sslMethod: SSLMethod.SNI,
           securityPolicy: SecurityPolicyProtocol.TLS_V1_2_2019,
@@ -212,11 +217,15 @@ export class Website extends Construct {
     const websiteBucket = this.getS3Bucket();
     const accessIdentity = this.getAccessIdentity(websiteBucket);
     const hostedZone = this.getHostedZone();
-    const certificate = this.getCertificate(hostedZone);
+    let certificateArn = this.props.certificateARN;
+    if ( certificateArn === undefined && certificateArn === null ) {
+      const certificate = this.getCertificate(hostedZone);
+      certificateArn = certificate.certificateArn;
+    }
     const distribution = this.getCloudFrontDistribution(
       websiteBucket,
       accessIdentity,
-      certificate,
+      certificateArn!,
     );
     this.addRoute53Record(distribution, hostedZone);
     this.deployBucket(websiteBucket, distribution);
