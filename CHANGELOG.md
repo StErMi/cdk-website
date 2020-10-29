@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/stermi/cdk-website/compare/v0.0.4...v0.0.5) (2020-10-29)
+
+
+### Bug Fixes
+
+* :bug: Fixed a bug on certificateArn usage, updated API documentation ([4206bd0](https://github.com/stermi/cdk-website/commit/4206bd042c9267e1aa2042642220ff1a95363351))
+
 ### [0.0.4](https://github.com/stermi/cdk-website/compare/v0.0.2...v0.0.4) (2020-10-29)
 
 
