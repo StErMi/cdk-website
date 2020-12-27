@@ -9,7 +9,7 @@ const project = new AwsCdkConstructLibrary({
   repository: 'https://github.com/stermi/cdk-website.git',
   keywords: ['spa', 'website', 'vue', 'react', 'angular'],
 
-  cdkVersion: '1.69.0',
+  cdkVersion: '1.80.0',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-certificatemanager',
@@ -29,6 +29,6 @@ const project = new AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
 });
 
-project.gitignore.exclude('.env','.idea', '.vscode')
+project.gitignore.exclude('.env', '.idea', '.vscode');
 
 project.synth();
